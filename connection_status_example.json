@@ -1,0 +1,173 @@
+{
+  "metadata": {
+    "title": "Qt节点编辑器项目",
+    "created": "2024-01-01T12:00:00",
+    "version": "1.0"
+  },
+  "analysis_timestamp": "2024-01-01T12:05:00",
+  "nodes": {
+    "140000000000001": {
+      "id": "140000000000001",
+      "name": "信号源1",
+      "type": "signal_source",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "parameters": ["frequency=1000", "amplitude=1.0"],
+      "incoming_connections": [],
+      "outgoing_connections": [
+        {
+          "target_id": "140000000000002",
+          "target_name": "滤波器1",
+          "connection_id": "conn_140000000000001_140000000000002"
+        }
+      ],
+      "predecessors": [],
+      "successors": ["140000000000002"]
+    },
+    "140000000000002": {
+      "id": "140000000000002",
+      "name": "滤波器1",
+      "type": "filter",
+      "position": {
+        "x": 300,
+        "y": 200
+      },
+      "parameters": ["cutoff=500", "order=4"],
+      "incoming_connections": [
+        {
+          "source_id": "140000000000001",
+          "source_name": "信号源1",
+          "connection_id": "conn_140000000000001_140000000000002"
+        }
+      ],
+      "outgoing_connections": [
+        {
+          "target_id": "140000000000003",
+          "target_name": "FFT1",
+          "connection_id": "conn_140000000000002_140000000000003"
+        }
+      ],
+      "predecessors": ["140000000000001"],
+      "successors": ["140000000000003"]
+    },
+    "140000000000003": {
+      "id": "140000000000003",
+      "name": "FFT1",
+      "type": "fft",
+      "position": {
+        "x": 500,
+        "y": 200
+      },
+      "parameters": ["window_size=1024"],
+      "incoming_connections": [
+        {
+          "source_id": "140000000000002",
+          "source_name": "滤波器1",
+          "connection_id": "conn_140000000000002_140000000000003"
+        }
+      ],
+      "outgoing_connections": [
+        {
+          "target_id": "140000000000004",
+          "target_name": "输出1",
+          "connection_id": "conn_140000000000003_140000000000004"
+        }
+      ],
+      "predecessors": ["140000000000002"],
+      "successors": ["140000000000004"]
+    },
+    "140000000000004": {
+      "id": "140000000000004",
+      "name": "输出1",
+      "type": "output",
+      "position": {
+        "x": 700,
+        "y": 200
+      },
+      "parameters": ["format=csv"],
+      "incoming_connections": [
+        {
+          "source_id": "140000000000003",
+          "source_name": "FFT1",
+          "connection_id": "conn_140000000000003_140000000000004"
+        }
+      ],
+      "outgoing_connections": [],
+      "predecessors": ["140000000000003"],
+      "successors": []
+    }
+  },
+  "connections": [
+    {
+      "id": "conn_140000000000001_140000000000002",
+      "from_node": {
+        "id": "140000000000001",
+        "name": "信号源1"
+      },
+      "to_node": {
+        "id": "140000000000002",
+        "name": "滤波器1"
+      },
+      "connection_type": "data_flow",
+      "status": "active"
+    },
+    {
+      "id": "conn_140000000000002_140000000000003",
+      "from_node": {
+        "id": "140000000000002",
+        "name": "滤波器1"
+      },
+      "to_node": {
+        "id": "140000000000003",
+        "name": "FFT1"
+      },
+      "connection_type": "data_flow",
+      "status": "active"
+    },
+    {
+      "id": "conn_140000000000003_140000000000004",
+      "from_node": {
+        "id": "140000000000003",
+        "name": "FFT1"
+      },
+      "to_node": {
+        "id": "140000000000004",
+        "name": "输出1"
+      },
+      "connection_type": "data_flow",
+      "status": "active"
+    }
+  ],
+  "dependencies": {
+    "140000000000001": [],
+    "140000000000002": ["140000000000001"],
+    "140000000000003": ["140000000000002"],
+    "140000000000004": ["140000000000003"]
+  },
+  "execution_order": [
+    {
+      "id": "140000000000001",
+      "name": "信号源1"
+    },
+    {
+      "id": "140000000000002",
+      "name": "滤波器1"
+    },
+    {
+      "id": "140000000000003",
+      "name": "FFT1"
+    },
+    {
+      "id": "140000000000004",
+      "name": "输出1"
+    }
+  ],
+  "flow_analysis": {
+    "total_nodes": 4,
+    "total_connections": 3,
+    "entry_nodes": ["信号源1"],
+    "exit_nodes": ["输出1"]
+  }
+}
