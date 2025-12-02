@@ -194,14 +194,6 @@ make
 - **Linux**: CodeGenerator_v1.0.0_Linux.tar.gz
 - **macOS**: CodeGenerator_v1.0.0_macOS.dmg
 
-## 📞 技术支持
-
-### 获取帮助
-- **文档**: 查看本README和相关文档
-- **示例**: 参考项目中的示例文件
-- **社区**: 提交问题到项目Issue页面
-- **邮件**: technical-support@example.com
-
 ### 问题反馈
 提交问题时请包含：
 1. 操作系统和版本信息
